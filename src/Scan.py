@@ -122,7 +122,6 @@ if __name__ == '__main__':
     ]
     my_scan = Scan(image, polygon)
     my_scan.paint()
-
     plt.imshow(image)
     plt.show()
 
