@@ -19,5 +19,5 @@ class Node:
     def set_next(self, next):
         self._next = next
 
-
+class Link_list:
     
