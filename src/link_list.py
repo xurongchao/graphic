@@ -48,9 +48,9 @@ class Link_list:
     def remove(self, data):
         flag = self._head
         pre = None
-        while flag.get_next() is not None:
+        while flag is not None:
             if flag.get_data() == data:
-                if pre is None:
+                if not pre:
                     self._head = flag.get_next()
                 else:
                     pre.set_next(flag.get_next())

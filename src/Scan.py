@@ -57,44 +57,54 @@ class Scan:
         [Ymin, Ymax] = self._get_range()
         AET = Link_list()
         for i in range(Ymin, Ymax+1):
+
             if not AET.is_empty():
                 head = AET.get_head()
-                while head is not None:
+                while True:
                     [s_x, s_y, s_dalta] = head.get_data()
                     s_x += s_dalta
                     head.set_data([s_x, s_y, s_dalta])
                     head = head.get_next()
+                    if head is None:
+                        break
 
             if not AET.is_empty():
                 head = AET.get_head()
                 x_list = []
-                while head is not None:
+                while True:
                     [start_x,_,_] = head.get_data()
                     x_list.append(start_x)
                     head = head.get_next()
+                    if head is None:
+                        break
 
                 x_list.sort()
-                print(len(x_list))
+                #print(i, x_list)
                 for i1 in range(0, len(x_list), 2):
                     x1 = x_list[i1]
                     x2 = x_list[i1+1]
                     for j in range(int(x1), int(x2)+1):
-                        self._image[j][i] = 0
+                        self._image[i][j] = 0
                         #print([j, i])
 
             if not AET.is_empty():
                 head = AET.get_head()
-                while head is not None:
+                while True:
                     [s_x, s_y, s_dalta] = head.get_data()
                     if s_y == i:
                         AET.remove([s_x, s_y, s_dalta])
+                        print(AET.get_size())
                     head = head.get_next()
+                    if head is None:
+                        break
 
             if self._ET[i] is not None:
                 head = self._ET[i].get_head()
-                while head is not None:
+                while True:
                     AET.insert(head.get_data())
                     head = head.get_next()
+                    if head is None:
+                        break
 
 if __name__ == '__main__':
     image = np.ones([500, 500])
@@ -112,7 +122,8 @@ if __name__ == '__main__':
     ]
     my_scan = Scan(image, polygon)
     my_scan.paint()
-    plt.imshow(image, plt.cm.autumn)
+
+    plt.imshow(image)
     plt.show()
 
 
